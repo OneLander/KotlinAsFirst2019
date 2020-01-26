@@ -134,8 +134,8 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    val ls = maxOf(a,b,c)
-    val s2 = minOf(a,b,c)
+    val ls = maxOf(a, b, c)
+    val s2 = minOf(a, b, c)
     val s3 = (a + b + c) - ls - s2
     val cos = Double
     return if (a + b > c && a + c > b && b + c > a) {
