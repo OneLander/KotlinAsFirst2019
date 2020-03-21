@@ -117,7 +117,7 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * по формуле abs = sqrt(a1^2 + a2^2 + ... + aN^2).
  * Модуль пустого вектора считать равным 0.0.
  */
-fun abs(v: List<Double>): Double = sqrt(v.map {it * it}.sum())
+fun abs(v: List<Double>): Double = sqrt(v.map { it * it }.sum())
 
 /**
  * Простая
@@ -156,6 +156,7 @@ fun times(a: List<Int>, b: List<Int>): Int {
     }
     return c
 }
+
 /**
  * Средняя
  *
@@ -228,7 +229,16 @@ fun factorizeToString(n: Int): String = factorize(n).joinToString("*")
  * Результат перевода вернуть в виде списка цифр в base-ичной системе от старшей к младшей,
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
-fun convert(n: Int, base: Int): List<Int> = TODO()
+fun convert(n: Int, base: Int): List<Int> {
+    val lol = mutableListOf<Int>()
+    var num = n
+    if (num == 1) return listOf(n)
+    while (num > 0) {
+        lol.add(num % base)
+        num /= base
+    }
+    return lol.reversed()
+}
 
 /**
  * Сложная
@@ -241,7 +251,8 @@ fun convert(n: Int, base: Int): List<Int> = TODO()
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, n.toString(base) и подобные), запрещается.
  */
-fun convertToString(n: Int, base: Int): String = TODO()
+fun convertToString(n: Int, base: Int): String =
+    convert(n, base).map { if (it < 10) it else 'a' + it - 10 }.joinToString("")
 
 /**
  * Средняя
@@ -250,7 +261,16 @@ fun convertToString(n: Int, base: Int): String = TODO()
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
-fun decimal(digits: List<Int>, base: Int): Int = TODO()
+fun decimal(digits: List<Int>, base: Int): Int {
+    val m = digits.reversed()
+    var g = 1
+    var num = 0
+    for (i in m) {
+        num += i * g
+        g *= base
+    }
+    return num
+}
 
 /**
  * Сложная
