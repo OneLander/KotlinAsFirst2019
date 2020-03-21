@@ -3,6 +3,8 @@
 package lesson4.task1
 
 import lesson1.task1.discriminant
+import lesson3.task1.isPrime
+import lesson3.task1.minDivisor
 import kotlin.math.*
 
 /**
@@ -183,7 +185,14 @@ fun polynom(p: List<Int>, x: Int): Int {
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
+fun accumulate(list: MutableList<Int>): MutableList<Int> {
+    var a = 1
+    for (i in 1 until list.size) {
+        a += list[i]
+        list[i] = a
+    }
+    return list
+}
 
 /**
  * Средняя
@@ -192,7 +201,16 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
  * Результат разложения вернуть в виде списка множителей, например 75 -> (3, 5, 5).
  * Множители в списке должны располагаться по возрастанию.
  */
-fun factorize(n: Int): List<Int> = TODO()
+fun factorize(n: Int): List<Int> {
+    val lol = mutableListOf<Int>()
+    var num = n
+    if (isPrime(n)) return listOf(n)  // Из 3 лесона взял функцию из примера, держи вкурсе
+    while (num > 1) {
+        lol.add(minDivisor(num)) // От туда же, НОД
+        num /= minDivisor(num)
+    }
+    return lol
+}
 
 /**
  * Сложная
@@ -201,7 +219,7 @@ fun factorize(n: Int): List<Int> = TODO()
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String = TODO()
+fun factorizeToString(n: Int): String = factorize(n).joinToString("*")
 
 /**
  * Средняя
